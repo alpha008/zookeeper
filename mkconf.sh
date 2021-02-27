@@ -20,6 +20,7 @@ echo 3 >>  /home/ubuntu/zookeeper/etc/zk3/data/myid
 
 mkdir -p /home/ubuntu/zookeeper/conf/
 cd /home/ubuntu/zookeeper/conf/
-touch zoo1.cfg
-touch zoo2.cfg
-touch zoo3.cfg
+cp -r ../conf_example/* ./
+#touch zoo1.cfg
+#touch zoo2.cfg
+#touch zoo3.cfg
