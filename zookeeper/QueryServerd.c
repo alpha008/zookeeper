@@ -82,7 +82,7 @@ QueryServerd_watcher_awexists(zhandle_t *zh, int type, int state,
             }
             if (pid == 0) { /* child process */
                 // 重启 QueryServer 服务.
-                execl("/home/ubuntu/zookeeper/QueryServer", "QueryServer", NULL);
+                execl("/home/ubuntu/zookeeper/zookeeper/QueryServer", "QueryServer", NULL);
                 exit(EXIT_SUCCESS);
             }
             sleep(1); /* sleep 1 second for purpose. */

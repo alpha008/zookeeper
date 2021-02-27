@@ -1,7 +1,7 @@
 all:QueryServer
 QueryServer:
-	gcc -g -Wall QueryServer.c -I/usr/local/include/zookeeper -o QueryServer /usr/local/lib/libzookeeper_mt.a  -pthread
-	gcc -g -Wall QueryServerd.c -I/usr/local/include/zookeeper -o QueryServerd /usr/local/lib/libzookeeper_mt.a  -pthread
+	gcc -g -Wall QueryServer.c -I/usr/local/include/zookeeper -o QueryServer /usr/local/lib/libzookeeper_mt.so  -lpthread
+	gcc -g -Wall QueryServerd.c -I/usr/local/include/zookeeper -o QueryServerd /usr/local/lib/libzookeeper_mt.so  -lpthread
 
 .PHONY:clean
 clean:
