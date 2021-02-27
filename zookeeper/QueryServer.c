@@ -63,7 +63,7 @@ int main(int argc, const char *argv[])
         // 为了简单起见, 我们在此调用一个简单的函数来模拟 QueryServer.
         // 然后休眠 5 秒，程序主动退出(即假设此时已经崩溃).
         QueryServer_accept_query();
-        sleep(15);
+        sleep(5);
     } while(false);
 
     zookeeper_close(zkhandle);

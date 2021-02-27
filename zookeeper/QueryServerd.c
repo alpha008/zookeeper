@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <zookeeper/zookeeper.h>
 #include <zookeeper/zookeeper_log.h>
+#include <time.h>
+#include <stdarg.h>
 
 void QueryServerd_watcher_global(zhandle_t * zh, int type, int state,
                             const char *path, void *watcherCtx);
@@ -70,9 +72,16 @@ void
 QueryServerd_watcher_awexists(zhandle_t *zh, int type, int state,
                               const char *path, void *watcherCtx)
 {
+
+
     if (state == ZOO_CONNECTED_STATE) {
         if (type == ZOO_DELETED_EVENT) {
-            printf("QueryServer gone away, restart now...\n");
+            time_t timep;
+            time (&timep);
+            char time_buf[128];
+            strftime(time_buf, sizeof(time_buf), "%Y-%m-%d %H:%M:%S",localtime(&timep) );
+            printf("time:%s|QueryServer gone away, restart now... \n",time_buf);
+
             // re-exists and set watch on /QueryServer again.
             QueryServerd_awexists(zh);
             pid_t pid = fork();
@@ -82,7 +91,7 @@ QueryServerd_watcher_awexists(zhandle_t *zh, int type, int state,
             }
             if (pid == 0) { /* child process */
                 // 重启 QueryServer 服务.
-                execl("/home/ubuntu/zookeeper/zookeeper/QueryServer", "QueryServer", NULL);
+                execl("/home/ubuntu/zookeeper/zookeeper/QueryServer", "QueryServer", NULL);          
                 exit(EXIT_SUCCESS);
             }
             sleep(1); /* sleep 1 second for purpose. */
